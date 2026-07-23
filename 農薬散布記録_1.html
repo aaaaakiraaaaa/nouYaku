@@ -12,210 +12,428 @@
   body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; background: #f2f2f7; color: #1c1c1e; min-height: 100vh; }
   header { background: #fff; border-bottom: 0.5px solid #c6c6c8; padding: 16px 20px 12px; position: sticky; top: 0; z-index: 10; }
   header h1 { font-size: 17px; font-weight: 600; text-align: center; }
-  .tab-bar { display: flex; background: #fff; border-bottom: 0.5px solid #c6c6c8; }
-  .tab { flex: 1; padding: 12px 8px; border: none; background: transparent; font-size: 13px; color: #8e8e93; cursor: pointer; font-family: inherit; border-bottom: 2px solid transparent; }
+  .tab-bar { display: flex; background: #fff; border-bottom: 0.5px solid #c6c6c8; position: sticky; top: 53px; z-index: 9; }
+  .tab { flex: 1; padding: 10px 4px; border: none; background: transparent; font-size: 12px; color: #8e8e93; cursor: pointer; font-family: inherit; border-bottom: 2px solid transparent; }
   .tab.active { color: #007aff; border-bottom-color: #007aff; font-weight: 500; }
   .section { display: none; padding: 16px; }
   .section.active { display: block; }
   .card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .card-title { font-size: 13px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
   .form-group { margin-bottom: 14px; }
-  .form-group label { display: block; font-size: 12px; color: #8e8e93; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
-  .form-group input { width: 100%; font-size: 16px; border: none; outline: none; padding: 6px 0; border-bottom: 0.5px solid #c6c6c8; background: transparent; font-family: inherit; color: #1c1c1e; }
-  .form-group input:focus { border-bottom-color: #007aff; }
+  .form-group label { display: block; font-size: 12px; color: #8e8e93; margin-bottom: 4px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; font-size: 16px; border: none; outline: none; padding: 6px 0; border-bottom: 0.5px solid #c6c6c8; background: transparent; font-family: inherit; color: #1c1c1e; }
+  .form-group select { -webkit-appearance: none; }
+  .form-group textarea { resize: none; height: 70px; border: 0.5px solid #c6c6c8; border-radius: 8px; padding: 8px; margin-top: 2px; }
+  .form-group input:focus, .form-group select:focus { border-bottom-color: #007aff; }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .btn-save { width: 100%; padding: 14px; background: #007aff; color: #fff; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 8px; }
+  .volume-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: end; }
+  .volume-row select { width: auto; min-width: 80px; font-size: 15px; }
+  .type-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+  .type-btn { flex: 1; padding: 10px; border: 0.5px solid #c6c6c8; border-radius: 10px; background: #fff; font-size: 15px; color: #8e8e93; cursor: pointer; font-family: inherit; text-align: center; }
+  .type-btn.active { border-color: #007aff; color: #007aff; background: #f0f6ff; font-weight: 500; }
+  .btn-save { width: 100%; padding: 14px; background: #007aff; color: #fff; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 4px; }
   .btn-save:active { background: #0062cc; }
   .btn-save:disabled { background: #c7c7cc; cursor: not-allowed; }
+  .btn-add { width: 100%; padding: 10px; background: transparent; border: 0.5px solid #007aff; border-radius: 10px; font-size: 15px; color: #007aff; cursor: pointer; font-family: inherit; margin-top: 4px; }
+  .btn-add:disabled { opacity: 0.5; cursor: not-allowed; }
   .status { padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-bottom: 16px; display: none; }
   .status.success { background: #d1f2e0; color: #1a7f4b; display: block; }
   .status.error { background: #fde8e8; color: #c0392b; display: block; }
   .status.loading { background: #fff3cd; color: #856404; display: block; }
-  .record-card { background: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; position: relative; }
-  .record-header { display: flex; justify-content: space-between; align-items: flex-start; }
+  .master-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid #f2f2f7; }
+  .master-item:last-child { border-bottom: none; }
+  .master-item-text { font-size: 15px; }
+  .master-item-sub { font-size: 12px; color: #8e8e93; margin-top: 2px; }
+  .del-btn { background: none; border: none; color: #c7c7cc; font-size: 20px; cursor: pointer; padding: 4px 8px; }
+  .del-btn:active { color: #ff3b30; }
+  .record-card { background: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
   .record-date { font-size: 12px; color: #8e8e93; margin-bottom: 4px; }
   .record-main { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
-  .record-sub { font-size: 14px; color: #3c3c43; }
+  .record-sub { font-size: 14px; color: #3c3c43; margin-bottom: 4px; }
+  .record-note { font-size: 13px; color: #8e8e93; margin-top: 6px; }
   .record-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
   .tag { font-size: 12px; padding: 3px 10px; border-radius: 20px; background: #e8f0fe; color: #1a56db; }
   .tag.green { background: #d1f2e0; color: #1a7f4b; }
+  .tag.gray { background: #f2f2f7; color: #8e8e93; }
+  .tag.orange { background: #fff0e0; color: #b85c00; }
   .sheet-label { font-size: 11px; color: #8e8e93; margin-top: 8px; }
-  .del-btn { background: none; border: none; color: #c7c7cc; font-size: 20px; cursor: pointer; padding: 0; line-height: 1; }
-  .del-btn:active { color: #ff3b30; }
   .empty { text-align: center; padding: 60px 20px; color: #8e8e93; font-size: 15px; }
-  .section-title { font-size: 13px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .section-label { font-size: 13px; font-weight: 600; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .filter-bar { display: flex; gap: 8px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
+  .filter-btn { flex-shrink: 0; padding: 6px 14px; border-radius: 20px; border: 0.5px solid #c6c6c8; background: #fff; font-size: 13px; color: #3c3c43; cursor: pointer; font-family: inherit; }
+  .filter-btn.active { background: #007aff; color: #fff; border-color: #007aff; }
   #dummy-iframe { display: none; }
 </style>
 </head>
 <body>
-
-<header>
-  <h1>🌾 農薬散布記録</h1>
-</header>
-
+<header><h1>🌾 農薬散布記録</h1></header>
 <div class="tab-bar">
-  <button class="tab active" onclick="switchTab('input')">＋ 記録入力</button>
+  <button class="tab active" onclick="switchTab('master')">🌱 作物・タグ</button>
+  <button class="tab" onclick="switchTab('input')">📝 作業記録</button>
   <button class="tab" onclick="switchTab('list')">📋 履歴</button>
 </div>
 
-<div id="tab-input" class="section active">
-  <div id="status" class="status"></div>
+<!-- タブ1：作物・タグマスタ -->
+<div id="tab-master" class="section active">
+  <div id="status-master" class="status"></div>
   <div class="card">
-    <div class="form-group">
-      <label>散布日</label>
-      <input type="date" id="f-date">
-    </div>
+    <div class="card-title">作物・タグを登録</div>
     <div class="row2">
       <div class="form-group">
         <label>作物名</label>
-        <input type="text" id="f-crop" placeholder="米、りんご など">
+        <input type="text" id="m-crop" placeholder="例: 人参">
       </div>
       <div class="form-group">
-        <label>圃場名</label>
-        <input type="text" id="f-field" placeholder="第1圃場 など">
+        <label>タグ</label>
+        <input type="text" id="m-field" placeholder="例: 北側、A区画">
       </div>
     </div>
     <div class="form-group">
-      <label>農薬名</label>
-      <input type="text" id="f-pesticide" placeholder="スミチオン乳剤 など">
-    </div>
-    <div class="row2">
-      <div class="form-group">
-        <label>希釈倍数</label>
-        <input type="text" id="f-dilution" placeholder="1000倍">
-      </div>
-      <div class="form-group">
-        <label>散布量 (L)</label>
-        <input type="number" id="f-volume" placeholder="50">
-      </div>
+      <label>耕起日</label>
+      <input type="date" id="m-tillage">
     </div>
     <div class="form-group">
-      <label>散布面積 (a)</label>
-      <input type="number" id="f-area" placeholder="10">
+      <label>備考</label>
+      <textarea id="m-note" placeholder="自由にメモを入力"></textarea>
     </div>
+    <button class="btn-add" onclick="addMaster()">＋ 登録する</button>
   </div>
-  <button class="btn-save" id="save-btn" onclick="saveRecord()">スプレッドシートに保存</button>
+  <div class="section-label">登録済みの作物・タグ</div>
+  <div class="card">
+    <div id="master-list"><div class="empty" style="padding:20px">まだ登録がありません</div></div>
+  </div>
 </div>
 
+<!-- タブ2：作業記録 -->
+<div id="tab-input" class="section">
+  <div id="status-input" class="status"></div>
+
+  <div class="type-toggle">
+    <button class="type-btn active" id="type-pest" onclick="switchType('pest')">💊 農薬散布</button>
+    <button class="type-btn" id="type-other" onclick="switchType('other')">🔧 その他作業</button>
+  </div>
+
+  <!-- 農薬散布フォーム -->
+  <div id="form-pest">
+    <div class="card">
+      <div class="card-title">農薬散布</div>
+      <div class="form-group">
+        <label>散布日</label>
+        <input type="date" id="f-date">
+      </div>
+      <div class="row2">
+        <div class="form-group">
+          <label>作物名</label>
+          <select id="f-crop" onchange="updateFieldOptions('f-crop','f-field')">
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>タグ</label>
+          <select id="f-field">
+            <option value="">選択してください</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>農薬名</label>
+        <input type="text" id="f-pesticide" placeholder="例: スミチオン乳剤">
+      </div>
+      <div class="form-group">
+        <label>使用量</label>
+        <div class="volume-row">
+          <input type="number" id="f-volume" placeholder="例: 50">
+          <select id="f-unit">
+            <option>kg/a</option><option>kg</option><option>cc</option>
+            <option>倍</option><option>%</option><option>g</option>
+            <option>袋</option><option>袋/a</option><option>L</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>散布面積 (a)</label>
+        <input type="number" id="f-area" placeholder="例: 10">
+      </div>
+      <div class="form-group">
+        <label>メモ</label>
+        <input type="text" id="f-memo" placeholder="例: ドローン、早朝散布 など">
+      </div>
+    </div>
+    <button class="btn-save" id="save-pest-btn" onclick="savePest()">スプレッドシートに保存</button>
+  </div>
+
+  <!-- その他作業フォーム -->
+  <div id="form-other" style="display:none">
+    <div class="card">
+      <div class="card-title">その他作業</div>
+      <div class="form-group">
+        <label>作業日</label>
+        <input type="date" id="o-date">
+      </div>
+      <div class="row2">
+        <div class="form-group">
+          <label>作物名</label>
+          <select id="o-crop" onchange="updateFieldOptions('o-crop','o-field')">
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>タグ</label>
+          <select id="o-field">
+            <option value="">選択してください</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>作業名</label>
+        <input type="text" id="o-name" placeholder="例: パオパオ取り、定植、収穫">
+      </div>
+      <div class="form-group">
+        <label>メモ</label>
+        <textarea id="o-memo" placeholder="作業の詳細を自由に入力"></textarea>
+      </div>
+    </div>
+    <button class="btn-save" id="save-other-btn" onclick="saveOther()">スプレッドシートに保存</button>
+  </div>
+</div>
+
+<!-- タブ3：履歴 -->
 <div id="tab-list" class="section">
-  <div class="section-title">過去の記録</div>
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-key="all" onclick="filterRecords('all')">すべて</button>
+  </div>
+  <div id="list-status" class="status"></div>
+  <button class="btn-add" id="reload-btn" onclick="loadFromSheet()" style="margin-bottom:12px">🔄 スプレッドシートから読み込む</button>
   <div id="records-list"></div>
 </div>
 
-<!-- フォーム送信用の非表示iframe -->
 <iframe id="dummy-iframe" name="dummy-iframe"></iframe>
 <form id="gas-form"
       action="https://script.google.com/macros/s/AKfycbzXH6Ikcv4WVk2QuvGZbDPzDwvr61imEH13QS3fRRILuD92RKIXq-Uuq1BMxUchYJWi0g/exec"
-      method="POST"
-      target="dummy-iframe"
-      style="display:none;">
+      method="POST" target="dummy-iframe" style="display:none;">
+  <input type="hidden" name="type" id="h-type">
   <input type="hidden" name="date" id="h-date">
   <input type="hidden" name="crop" id="h-crop">
   <input type="hidden" name="field" id="h-field">
   <input type="hidden" name="pesticide" id="h-pesticide">
-  <input type="hidden" name="dilution" id="h-dilution">
   <input type="hidden" name="volume" id="h-volume">
+  <input type="hidden" name="unit" id="h-unit">
   <input type="hidden" name="area" id="h-area">
+  <input type="hidden" name="memo" id="h-memo">
+  <input type="hidden" name="workname" id="h-workname">
+  <input type="hidden" name="tillage" id="h-tillage">
+  <input type="hidden" name="note" id="h-note">
 </form>
 
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbzXH6Ikcv4WVk2QuvGZbDPzDwvr61imEH13QS3fRRILuD92RKIXq-Uuq1BMxUchYJWi0g/exec';
-let records = JSON.parse(localStorage.getItem('pestRecords') || '[]');
-let pendingData = null;
+let masters = JSON.parse(localStorage.getItem('masters') || '[]');
+let sheetRecords = [];
+let currentFilter = 'all';
+let pendingType = null;
 
-function saveLocal() { localStorage.setItem('pestRecords', JSON.stringify(records)); }
+function saveMasters() { localStorage.setItem('masters', JSON.stringify(masters)); }
 
-function showStatus(msg, type) {
-  const el = document.getElementById('status');
-  el.textContent = msg;
-  el.className = 'status ' + type;
-  if (type === 'success') setTimeout(() => { el.style.display = 'none'; }, 4000);
+function showStatus(id, msg, type) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.className = 'status ' + type;
+  if (type === 'success') setTimeout(() => el.style.display = 'none', 3000);
 }
 
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((b, i) => b.classList.toggle('active', ['input','list'][i] === name));
+  document.querySelectorAll('.tab').forEach((b,i) => b.classList.toggle('active', ['master','input','list'][i] === name));
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'input') { updateCropOptions('f-crop','f-field'); updateCropOptions('o-crop','o-field'); }
   if (name === 'list') renderList();
 }
 
-function saveRecord() {
-  const d = {
-    date: document.getElementById('f-date').value,
-    crop: document.getElementById('f-crop').value.trim(),
-    field: document.getElementById('f-field').value.trim(),
-    pesticide: document.getElementById('f-pesticide').value.trim(),
-    dilution: document.getElementById('f-dilution').value.trim(),
-    volume: document.getElementById('f-volume').value,
-    area: document.getElementById('f-area').value,
-    id: Date.now()
-  };
+function switchType(type) {
+  document.getElementById('type-pest').classList.toggle('active', type === 'pest');
+  document.getElementById('type-other').classList.toggle('active', type === 'other');
+  document.getElementById('form-pest').style.display = type === 'pest' ? 'block' : 'none';
+  document.getElementById('form-other').style.display = type === 'other' ? 'block' : 'none';
+}
 
-  if (!d.date || !d.crop || !d.pesticide) {
-    showStatus('⚠️ 散布日・作物名・農薬名は必須です', 'error');
-    return;
-  }
-
-  document.getElementById('h-date').value = d.date;
-  document.getElementById('h-crop').value = d.crop;
-  document.getElementById('h-field').value = d.field;
-  document.getElementById('h-pesticide').value = d.pesticide;
-  document.getElementById('h-dilution').value = d.dilution;
-  document.getElementById('h-volume').value = d.volume;
-  document.getElementById('h-area').value = d.area;
-
-  document.getElementById('save-btn').disabled = true;
-  showStatus('送信中...', 'loading');
-
-  pendingData = d;
+function addMaster() {
+  const crop = document.getElementById('m-crop').value.trim();
+  const field = document.getElementById('m-field').value.trim();
+  const tillage = document.getElementById('m-tillage').value;
+  const note = document.getElementById('m-note').value.trim();
+  if (!crop || !field) { showStatus('status-master', '⚠️ 作物名とタグは必須です', 'error'); return; }
+  if (masters.find(m => m.crop === crop && m.field === field)) { showStatus('status-master', '⚠️ すでに登録されています', 'error'); return; }
+  masters.push({ crop, field, tillage, note, id: Date.now() });
+  saveMasters();
+  document.getElementById('m-crop').value = '';
+  document.getElementById('m-field').value = '';
+  document.getElementById('m-tillage').value = '';
+  document.getElementById('m-note').value = '';
+  showStatus('status-master', '✓ 登録しました', 'success');
+  renderMasterList();
+  document.getElementById('h-type').value = 'master';
+  document.getElementById('h-crop').value = crop;
+  document.getElementById('h-field').value = field;
+  document.getElementById('h-tillage').value = tillage;
+  document.getElementById('h-note').value = note;
   document.getElementById('gas-form').submit();
+}
 
+function deleteMaster(id) {
+  if (!confirm('削除しますか？')) return;
+  masters = masters.filter(m => m.id !== id);
+  saveMasters(); renderMasterList();
+}
+
+function renderMasterList() {
+  const el = document.getElementById('master-list');
+  if (!masters.length) { el.innerHTML = '<div class="empty" style="padding:20px">まだ登録がありません</div>'; return; }
+  el.innerHTML = masters.map(m =>
+    '<div class="master-item">'
+    + '<div>'
+    + '<div class="master-item-text">' + m.crop + ' · ' + m.field + '</div>'
+    + (m.tillage ? '<div class="master-item-sub">耕起日: ' + m.tillage + '</div>' : '')
+    + (m.note ? '<div class="master-item-sub">📝 ' + m.note + '</div>' : '')
+    + '</div>'
+    + '<button class="del-btn" onclick="deleteMaster(' + m.id + ')">×</button>'
+    + '</div>'
+  ).join('');
+}
+
+function updateCropOptions(cropId, fieldId) {
+  const crops = [...new Set(masters.map(m => m.crop))];
+  const sel = document.getElementById(cropId);
+  const current = sel.value;
+  sel.innerHTML = '<option value="">選択してください</option>' + crops.map(c => '<option value="' + c + '"' + (c===current?' selected':'') + '>' + c + '</option>').join('');
+  updateFieldOptions(cropId, fieldId);
+}
+
+function updateFieldOptions(cropId, fieldId) {
+  const crop = document.getElementById(cropId).value;
+  const fields = masters.filter(m => m.crop === crop).map(m => m.field);
+  const sel = document.getElementById(fieldId);
+  sel.innerHTML = '<option value="">選択してください</option>' + fields.map(f => '<option value="' + f + '">' + f + '</option>').join('');
+}
+
+function submitForm(data) {
+  Object.keys(data).forEach(k => {
+    const el = document.getElementById('h-' + k);
+    if (el) el.value = data[k] || '';
+  });
+  document.getElementById('gas-form').submit();
+}
+
+function savePest() {
+  const d = {
+    type: 'pest',
+    date: document.getElementById('f-date').value,
+    crop: document.getElementById('f-crop').value,
+    field: document.getElementById('f-field').value,
+    pesticide: document.getElementById('f-pesticide').value.trim(),
+    volume: document.getElementById('f-volume').value,
+    unit: document.getElementById('f-unit').value,
+    area: document.getElementById('f-area').value,
+    memo: document.getElementById('f-memo').value.trim()
+  };
+  if (!d.date || !d.crop || !d.field || !d.pesticide) {
+    showStatus('status-input', '⚠️ 散布日・作物・タグ・農薬名は必須です', 'error'); return;
+  }
+  document.getElementById('save-pest-btn').disabled = true;
+  showStatus('status-input', '送信中...', 'loading');
+  pendingType = 'pest';
+  submitForm(d);
   setTimeout(() => {
-    if (pendingData) {
-      records.unshift(pendingData);
-      saveLocal();
-      const sheetName = pendingData.crop + '_' + (pendingData.field || '不明');
-      showStatus('✓ 「' + sheetName + '」シートに保存しました', 'success');
-      ['f-crop','f-field','f-pesticide','f-dilution','f-volume','f-area'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
-      pendingData = null;
-      document.getElementById('save-btn').disabled = false;
-    }
+    showStatus('status-input', '✓ 「' + d.crop + '_' + d.field + '」シートに保存しました', 'success');
+    ['f-pesticide','f-volume','f-area','f-memo'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+    document.getElementById('save-pest-btn').disabled = false;
+    pendingType = null;
   }, 2000);
 }
 
-function deleteRecord(id) {
-  if (!confirm('この記録を削除しますか？\n※スプレッドシートのデータは削除されません')) return;
-  records = records.filter(r => r.id !== id);
-  saveLocal();
+function saveOther() {
+  const d = {
+    type: 'other',
+    date: document.getElementById('o-date').value,
+    crop: document.getElementById('o-crop').value,
+    field: document.getElementById('o-field').value,
+    workname: document.getElementById('o-name').value.trim(),
+    memo: document.getElementById('o-memo').value.trim()
+  };
+  if (!d.date || !d.crop || !d.field || !d.workname) {
+    showStatus('status-input', '⚠️ 作業日・作物・タグ・作業名は必須です', 'error'); return;
+  }
+  document.getElementById('save-other-btn').disabled = true;
+  showStatus('status-input', '送信中...', 'loading');
+  pendingType = 'other';
+  submitForm(d);
+  setTimeout(() => {
+    showStatus('status-input', '✓ 「' + d.crop + '_' + d.field + '」シートに保存しました', 'success');
+    document.getElementById('o-name').value = '';
+    document.getElementById('o-memo').value = '';
+    document.getElementById('o-date').value = new Date().toISOString().split('T')[0];
+    document.getElementById('save-other-btn').disabled = false;
+    pendingType = null;
+  }, 2000);
+}
+
+function filterRecords(key) {
+  currentFilter = key;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.key === key));
   renderList();
 }
 
-function renderList() {
-  const el = document.getElementById('records-list');
-  if (!records.length) {
-    el.innerHTML = '<div class="empty">📋<br><br>記録がありません</div>';
-    return;
+async function loadFromSheet() {
+  const btn = document.getElementById('reload-btn');
+  const st = document.getElementById('list-status');
+  btn.disabled = true;
+  st.textContent = '読み込み中...';
+  st.className = 'status loading';
+  try {
+    const res = await fetch(GAS_URL, { method: 'GET', mode: 'cors' });
+    const data = await res.json();
+    if (data.result === 'success') {
+      sheetRecords = data.records;
+      st.textContent = '✓ ' + sheetRecords.length + '件読み込みました';
+      st.className = 'status success';
+      setTimeout(() => st.style.display = 'none', 3000);
+      renderList();
+    }
+  } catch(e) {
+    st.textContent = '✗ 読み込みに失敗しました';
+    st.className = 'status error';
+  } finally {
+    btn.disabled = false;
   }
-  el.innerHTML = records.map(r => `
-    <div class="record-card">
-      <div class="record-header">
-        <div>
-          <div class="record-date">${r.date}</div>
-          <div class="record-main">${r.pesticide}</div>
-          <div class="record-sub">${r.crop}${r.field ? ' · ' + r.field : ''}</div>
-        </div>
-        <button class="del-btn" onclick="deleteRecord(${r.id})" aria-label="削除">×</button>
-      </div>
-      <div class="record-tags">
-        ${r.dilution ? '<span class="tag">' + r.dilution + '</span>' : ''}
-        ${r.volume ? '<span class="tag green">' + r.volume + 'L</span>' : ''}
-        ${r.area ? '<span class="tag green">' + r.area + 'a</span>' : ''}
-      </div>
-      <div class="sheet-label">📄 ${r.crop}_${r.field || '不明'}</div>
-    </div>`).join('');
+}
+
+function renderList() {
+  const filtered = currentFilter === 'all' ? sheetRecords : sheetRecords.filter(r => r.crop === currentFilter);
+  const crops = [...new Set(sheetRecords.map(r => r.crop))];
+  const bar = document.getElementById('filter-bar');
+  bar.innerHTML = '<button class="filter-btn' + (currentFilter==='all'?' active':'') + '" data-key="all" onclick="filterRecords(\'all\')">すべて</button>'
+    + crops.map(c => '<button class="filter-btn' + (currentFilter===c?' active':'') + '" data-key="' + c + '" onclick="filterRecords(\'' + c + '\')">' + c + '</button>').join('');
+  const el = document.getElementById('records-list');
+  if (!filtered.length) { el.innerHTML = '<div class="empty">📋<br><br>「読み込む」ボタンを押してください</div>'; return; }
+  el.innerHTML = filtered.map(r => {
+    const isPest = r.kind === '農薬散布';
+    return '<div class="record-card">'
+      + '<div class="record-date">' + (r.date||'') + '</div>'
+      + '<div class="record-main">' + (isPest ? (r.pesticide||'') : (r.workname||'')) + '</div>'
+      + '<div class="record-sub">' + (r.crop||'') + ' · ' + (r.field||'') + '</div>'
+      + '<div class="record-tags">'
+      + '<span class="tag ' + (isPest ? '' : 'orange') + '">' + (isPest ? '💊 農薬散布' : '🔧 その他作業') + '</span>'
+      + (isPest && r.volume ? '<span class="tag green">' + r.volume + (r.unit||'') + '</span>' : '')
+      + (isPest && r.area ? '<span class="tag green">' + r.area + 'a</span>' : '')
+      + '</div>'
+      + (r.memo ? '<div class="record-note">📝 ' + r.memo + '</div>' : '')
+      + '<div class="sheet-label">📄 ' + (r.crop||'') + '_' + (r.field||'') + '</div>'
+      + '</div>';
+  }).join('');
 }
 
 document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+document.getElementById('o-date').value = new Date().toISOString().split('T')[0];
+renderMasterList();
 </script>
 </body>
 </html>
